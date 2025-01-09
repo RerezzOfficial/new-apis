@@ -1,4 +1,17 @@
-// Endpoint Login
+const express = require('express');
+const path = require('path');
+const fs = require('fs');
+
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+// Middleware untuk parsing form data
+app.use(express.urlencoded({ extended: true }));
+
+// Middleware untuk melayani file statis dari folder "public"
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Endpoint Login (POST)
 app.post('/login', (req, res) => {
     const { username, password } = req.body;
 
@@ -30,7 +43,12 @@ app.post('/login', (req, res) => {
     }
 });
 
-// Endpoint untuk menampilkan dashboard setelah login
+// Endpoint untuk menampilkan dashboard setelah login (GET)
 app.get('/dashboard', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'dashboard.html'));
+});
+
+// Jalankan server
+app.listen(PORT, () => {
+    console.log(`Server berjalan di http://localhost:${PORT}`);
 });
