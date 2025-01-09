@@ -1,7 +1,7 @@
 {
   "name": "nodejs-login",
   "version": "1.0.0",
-  "description": "Website dengan fitur login sederhana menggunakan Node.js",
+  "description": "A simple login system with Node.js and Express",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
