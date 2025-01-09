@@ -4,42 +4,177 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+    <!-- Link Font Awesome CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
     <style>
-        body {
-            font-family: Arial, sans-serif;
+        /* Reset and basic layout */
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #050505;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            background: #f4f4f4;
-        }
-        .container {
-            text-align: center;
-            background: white;
+            min-height: 100vh;
             padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
-        button {
-            padding: 10px 20px;
-            background: #007BFF;
-            color: white;
-            border: none;
-            border-radius: 5px;
+
+        .container {
+            background-color: #ffffff;
+            padding: 40px;
+            width: 100%;
+            max-width: 380px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.1);
+            text-align: center;
+            transition: all 0.3s ease-in-out;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            color: #2d3748;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        /* Input field styles */
+        .input-container {
+            position: relative;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 14px 40px;
+            margin: 10px 0;
+            border: 2px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 1.1em;
+            outline: none;
+            background: #f9fafb;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        input[type="text"]:focus, input[type="password"]:focus {
+            border-color: #4f9ad2;
+            box-shadow: 0 0 8px rgba(79, 154, 210, 0.4);
+        }
+
+        input[type="text"]:hover, input[type="password"]:hover {
+            border-color: #4f9ad2;
+        }
+
+        /* Icon for input fields */
+        .input-container i {
+            position: absolute;
+            top: 50%;
+            left: 12px;
+            transform: translateY(-50%);
+            font-size: 1.4em;
+            color: #4f9ad2;
+        }
+
+        .input-container i.password-toggle {
+            right: 15px;
+            left: auto;
             cursor: pointer;
         }
+
+        /* Button styles */
+        button {
+            width: 100%;
+            padding: 15px;
+            background-color: #4f9ad2;
+            color: white;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #338db3;
+            transform: translateY(-3px);
+        }
+
+        /* Subtle shadow and hover effect for the form */
+        .container:hover {
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            transform: translateY(-10px);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 480px) {
+            .container {
+                padding: 30px;
+                width: 90%;
+            }
+            h1 {
+                font-size: 2em;
+            }
+            button {
+                font-size: 1.1em;
+            }
+        }
+
+        /* Animation */
+        .container {
+            animation: fadeIn 1s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Login</h1>
         <form action="/login" method="POST">
-            <input type="text" name="username" placeholder="Username" required><br><br>
-            <input type="password" name="password" placeholder="Password" required><br><br>
+            <div class="input-container">
+                <i class="fas fa-user"></i>
+                <input type="text" name="username" placeholder="Username" required><br>
+            </div>
+
+            <div class="input-container">
+                <i class="fas fa-lock"></i>
+                <input type="password" name="password" id="password" placeholder="Password" required>
+                <i class="fas fa-eye password-toggle" id="toggle-password"></i>
+            </div>
+
             <button type="submit">Login</button>
         </form>
     </div>
+
+    <script>
+        // Toggle password visibility
+        const togglePassword = document.getElementById('toggle-password');
+        const passwordField = document.getElementById('password');
+
+        togglePassword.addEventListener('click', () => {
+            // Toggle the type of the password field between text and password
+            const type = passwordField.type === 'password' ? 'text' : 'password';
+            passwordField.type = type;
+
+            // Toggle the eye icon
+            togglePassword.classList.toggle('fa-eye-slash');
+        });
+    </script>
 </body>
 </html>
