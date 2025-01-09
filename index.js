@@ -21,8 +21,11 @@ app.post('/login', (req, res) => {
     }
 
     try {
+        // Pastikan path ke database.json benar
+        const databasePath = path.join(__dirname, 'database.json');
+
         // Baca file database.json
-        const database = JSON.parse(fs.readFileSync('./database.json', 'utf8'));
+        const database = JSON.parse(fs.readFileSync(databasePath, 'utf8'));
 
         // Cari user di database
         const user = database.users.find(
@@ -37,10 +40,11 @@ app.post('/login', (req, res) => {
             res.status(401).send('Login gagal: Username atau password salah.');
         }
     } catch (err) {
-        console.error(err);
+        console.error('Error membaca database.json:', err.message); // Log error ke console
         res.status(500).send('Terjadi kesalahan pada server.');
     }
 });
+
 
 // Jalankan server
 app.listen(PORT, () => {
