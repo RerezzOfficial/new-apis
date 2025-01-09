@@ -12,7 +12,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Endpoint Login
-app.post('/login', (req, res) => {
+app.post('/dashboard', (req, res) => {
     const { username, password } = req.body;
 
     // Validasi input
